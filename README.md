@@ -1,16 +1,11 @@
-# book_perception
+# Book Perception
 
-A new Flutter application.
+##Introduction
 
-## Getting Started
+The aim of this project is to develop a solution for all the book lovers out there and make them have a whole new experience too. The apps that are already available in the market just either help them to look for good reads or are generic habit trackers. Our app combines the two and makes it a complete solution for everyone. It enables them to inculcate the brilliant habit of reading and looking up their favourite books and make their custom reads.
 
-This project is a starting point for a Flutter application.
+The project is majorly divided into 3 sections:
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Authentication
+- Habit Tracker
+- Search
