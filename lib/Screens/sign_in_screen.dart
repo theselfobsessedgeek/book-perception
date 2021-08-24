@@ -40,8 +40,9 @@ class SignInScreen extends StatelessWidget {
                  text:"Sign In With Google"
              ),
              SignInButton(path:"assets/images/mail.png",
-               bgColor: Colors.green,
-               fgColor: Colors.white,
+
+               bgColor: Colors.green[400],
+               fgColor: Colors.black,
                text:"Sign In With E-Mail",
              ),
              SignInButton(path:"assets/images/incognito.png",
