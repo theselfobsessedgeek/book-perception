@@ -1,31 +1,51 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 
 class SignInButton extends StatelessWidget {
+  SignInButton({this.path, this.bgColor,this.fgColor, this.text,this.opa:1});
   final String text;
   final String path;
-  final Color color;
-
-  SignInButton(this.path,this.color,this.text);
+  final Color bgColor;
+  final Color fgColor;
+  final double opa;
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(onPressed: (){},
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Expanded(
-              child: Image(
-                image: AssetImage("$path"),
-              ),
+    return SizedBox(
+      height: 100.0,
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: TextButton(onPressed: (){},
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(bgColor),
+              foregroundColor: MaterialStateProperty.all<Color>(fgColor),
             ),
-            Expanded(
-              child: Text("$text",
+            child: Row(
 
-              ),
+              children: [
+                Expanded(
+                  child: Opacity(
+                    opacity: opa,
+                    child: Image(
+                      image: AssetImage("$path"),
+
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Text("$text",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
         ),
+      ),
     );
   }
 }
