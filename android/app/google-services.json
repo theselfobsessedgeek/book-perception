@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "127514277604",
+    "project_id": "book-perception",
+    "storage_bucket": "book-perception.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:127514277604:android:367c1fb33b776af6199ef1",
+        "android_client_info": {
+          "package_name": "com.shubham.book_perception"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "127514277604-jb89n8r06pbj342c994d0e0rbjug7slm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shubham.book_perception",
+            "certificate_hash": "c00caa26f5bd07763072feedb4dc5910f993454f"
+          }
+        },
+        {
+          "client_id": "127514277604-329935s992olhdem07q7eg1jh3aduiar.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtrRazm1IvRhQPP48laAPct0i_Wuh3r54"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "127514277604-329935s992olhdem07q7eg1jh3aduiar.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
