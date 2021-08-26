@@ -1,12 +1,19 @@
 import 'package:book_perception/Elements/sign_in_button.dart';
+import 'package:book_perception/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 
 class SignInScreen extends StatelessWidget {
+
+  const SignInScreen({Key key,@required this.auth}) : super(key: key);
+
+  final AuthBase auth;
   Future<void> _signInAnonymously() async{
-    final UserCredentials = await FirebaseAuth.instance.signInAnonymously();
-    print("${UserCredentials.user.uid}");
+    final userCredentials = await auth.signInAnonymously();
+  }
+  Future<void> _signInWithGoogle() async{
+    final userCredentials = await auth.signInWithGoogle();
   }
   @override
   Widget build(BuildContext context) {
@@ -43,7 +50,7 @@ class SignInScreen extends StatelessWidget {
                  bgColor: Colors.white,
                  fgColor: Colors.black,
                  text:"Sign In With Google",
-                 onPress: (){},
+                 onPress: _signInWithGoogle,
              ),
              SignInButton(path:"assets/images/mail.png",
 

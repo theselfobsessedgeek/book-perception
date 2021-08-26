@@ -18,7 +18,7 @@ class SignInButton extends StatelessWidget {
       height: 100.0,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: TextButton(onPressed: onPress,
+        child: ElevatedButton(onPressed: onPress,
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(bgColor),
               foregroundColor: MaterialStateProperty.all<Color>(fgColor),

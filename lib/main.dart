@@ -1,4 +1,5 @@
-import 'package:book_perception/Screens/sign_in_screen.dart';
+import 'package:book_perception/Screens/landingPage.dart';
+import 'package:book_perception/auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-      home: SignInScreen(),
+      home: LandingPage(
+        auth: Auth(),
+      ),
     );
   }
 }
