@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
                   style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w300,
-                    color: Colors.white ,
+                    color: Colors.white,
               ),
     ),
           )
@@ -34,5 +34,6 @@ class HomePage extends StatelessWidget {
       ),
       backgroundColor:Colors.brown[100] ,
     );
+
   }
 }

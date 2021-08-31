@@ -3,18 +3,46 @@ import 'package:book_perception/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import 'email_sign_in_page.dart';
+
 
 class SignInScreen extends StatelessWidget {
 
   const SignInScreen({Key key,@required this.auth}) : super(key: key);
 
   final AuthBase auth;
-  Future<void> _signInAnonymously() async{
-    final userCredentials = await auth.signInAnonymously();
+  Future<void> _signInAnonymously() async {
+    try {
+      await auth.signInAnonymously();
+    } catch (e) {
+      print(e.toString());
+    }
   }
-  Future<void> _signInWithGoogle() async{
-    final userCredentials = await auth.signInWithGoogle();
+
+  Future<void> _signInWithGoogle() async {
+    try {
+      await auth.signInWithGoogle();
+    } catch (e) {
+      print(e.toString());
+    }
   }
+
+  Future<void> _signInWithFacebook() async {
+    try {
+      await auth.signInWithFacebook();
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+  void _signInWithEmail(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        fullscreenDialog: true,
+        builder: (context) => EmailSignInPage(auth: auth),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,7 +72,7 @@ class SignInScreen extends StatelessWidget {
                  bgColor: Colors.blue[800],
                  fgColor: Colors.white,
                  text:"Sign In With Facebook",
-                 onPress: (){},
+                 onPress: _signInWithFacebook,
              ),
              SignInButton(path:"assets/images/google-logo.png",
                  bgColor: Colors.white,
@@ -57,7 +85,7 @@ class SignInScreen extends StatelessWidget {
                bgColor: Colors.green[400],
                fgColor: Colors.black,
                text:"Sign In With E-Mail",
-               onPress: (){},
+               onPress: ()=>_signInWithEmail(context),
              ),
              SignInButton(path:"assets/images/incognito.png",
                  bgColor: Colors.grey,
