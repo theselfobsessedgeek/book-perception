@@ -8,41 +8,46 @@ class SearchCard extends StatelessWidget {
     this.title,
     this.imgPath,
     this.author,
+    this.context
   });
   final String title;
   final String imgPath;
   final String author;
-
-  @override
-  Widget build(BuildContext context) {
+  final BuildContext context;
+  Widget build(BuildContext contexmt) {
     return Card(
+
       child: Row(
         children: <Widget>[
           Image.network(imgPath),
           Column(
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(title,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-
-                ),
-                  maxLines: 5,
-                  overflow: TextOverflow.fade,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(author,
+                padding: const EdgeInsets.all(0),
+                child: SizedBox(
+                  width:MediaQuery.of(context).size.width * 0.65,
+                  child: Text(title,
                   style: TextStyle(
-                    fontWeight: FontWeight.w300,
-                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
 
                   ),
+                  ),
                 ),
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.65,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(author,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w300,
+                      fontSize: 10,
 
+                    ),
+                  ),
+
+                ),
               ),
             ],
           ),
