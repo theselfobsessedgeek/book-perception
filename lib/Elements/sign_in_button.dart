@@ -15,9 +15,9 @@ class SignInButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 100.0,
+      height: 50.0,
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.fromLTRB(20.0,10,20,0),
         child: ElevatedButton(onPressed: onPress,
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(bgColor),
@@ -39,7 +39,7 @@ class SignInButton extends StatelessWidget {
                   child: Text("$text",
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
-                      fontSize: 20,
+                      fontSize: 12,
                     ),
                   ),
                 ),

@@ -15,7 +15,9 @@ class SignInScreen extends StatelessWidget {
     try {
       await auth.signInAnonymously();
     } catch (e) {
-      print(e.toString());
+      return Dialog(
+        child: Text(e.toString()),
+      );
     }
   }
 
@@ -23,7 +25,9 @@ class SignInScreen extends StatelessWidget {
     try {
       await auth.signInWithGoogle();
     } catch (e) {
-      print(e.toString());
+      return Dialog(
+        child: Text(e.toString()),
+      );
     }
   }
 
@@ -31,7 +35,9 @@ class SignInScreen extends StatelessWidget {
     try {
       await auth.signInWithFacebook();
     } catch (e) {
-      print(e.toString());
+      return Dialog(
+      child: Text(e.toString()),
+    );
     }
   }
   void _signInWithEmail(BuildContext context) {
@@ -50,7 +56,7 @@ class SignInScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text("Book Perception",
           style: TextStyle(
-              fontSize: 30,
+              fontSize: 25,
               fontWeight: FontWeight.w300
             ),
           ),
@@ -58,42 +64,45 @@ class SignInScreen extends StatelessWidget {
         ),
        backgroundColor:Colors.brown[100] ,
        body: Container(
-         child: Column(
-           children: [
-             Padding(
-               padding: const EdgeInsets.all(20.0),
-               child: Text("Sign In",
-               style: TextStyle(
-                 fontSize: 50,
+         child: Padding(
+           padding: const EdgeInsets.all(30),
+           child: Column(
+             children: [
+               Padding(
+                 padding: const EdgeInsets.all(50.0),
+                 child: Text("Sign In",
+                 style: TextStyle(
+                   fontSize: 30,
+                 ),
+                 ),
                ),
+               SignInButton(path:"assets/images/facebook-logo.png",
+                   bgColor: Colors.blue[800],
+                   fgColor: Colors.white,
+                   text:"Sign In With Facebook",
+                   onPress: _signInWithFacebook,
                ),
-             ),
-             SignInButton(path:"assets/images/facebook-logo.png",
-                 bgColor: Colors.blue[800],
-                 fgColor: Colors.white,
-                 text:"Sign In With Facebook",
-                 onPress: _signInWithFacebook,
-             ),
-             SignInButton(path:"assets/images/google-logo.png",
-                 bgColor: Colors.white,
-                 fgColor: Colors.black,
-                 text:"Sign In With Google",
-                 onPress: _signInWithGoogle,
-             ),
-             SignInButton(path:"assets/images/mail.png",
+               SignInButton(path:"assets/images/google-logo.png",
+                   bgColor: Colors.white,
+                   fgColor: Colors.black,
+                   text:"Sign In With Google",
+                   onPress: _signInWithGoogle,
+               ),
+               SignInButton(path:"assets/images/mail.png",
 
-               bgColor: Colors.green[400],
-               fgColor: Colors.black,
-               text:"Sign In With E-Mail",
-               onPress: ()=>_signInWithEmail(context),
-             ),
-             SignInButton(path:"assets/images/incognito.png",
-                 bgColor: Colors.grey,
-                 fgColor: Colors.white,
-                 text:"Sign In Anonymously",
-                 onPress: _signInAnonymously,
-             ),
-           ],
+                 bgColor: Colors.green[400],
+                 fgColor: Colors.black,
+                 text:"Sign In With E-Mail",
+                 onPress: ()=>_signInWithEmail(context),
+               ),
+               SignInButton(path:"assets/images/incognito.png",
+                   bgColor: Colors.grey,
+                   fgColor: Colors.white,
+                   text:"Sign In Anonymously",
+                   onPress: _signInAnonymously,
+               ),
+             ],
+           ),
          ),
        ),
       ),

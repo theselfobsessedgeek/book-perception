@@ -1,4 +1,6 @@
+import 'package:book_perception/Screens/search.dart';
 import 'package:book_perception/auth.dart';
+import 'package:books_finder/books_finder.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -8,32 +10,33 @@ class HomePage extends StatelessWidget {
   Future<void> _signOut() async{
     await auth.signOut();
   }
+
   @override
+
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Book Perception",
           style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.w300,
+              fontSize: 25,
+              fontWeight: FontWeight.w400,
               color: Colors.white ,
           ),
         ),
         backgroundColor: Colors.brown[400],
         actions: <Widget>[
           TextButton(onPressed: _signOut,
-              child:Text("Log Out",
-                  style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w300,
-                    color: Colors.white,
-              ),
-    ),
+          child: Icon(Icons.logout,color: Colors.white,) ,
           )
         ],
       ),
-      backgroundColor:Colors.brown[100] ,
+      backgroundColor:Colors.yellow[50] ,
+      body: SearchPage(),
+
     );
 
   }
+
 }
+

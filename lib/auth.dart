@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 //https://book-perception.firebaseapp.com/__/auth/handler
@@ -87,6 +88,9 @@ class Auth implements AuthBase{
         );
         return userCredential.user;
       case FacebookLoginStatus.cancel:
+        Dialog(
+          child: Text('Sign in aborted by user'),
+        );
         throw FirebaseAuthException(
           code: 'ERROR_ABORTED_BY_USER',
           message: 'Sign in aborted by user',
