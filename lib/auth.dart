@@ -2,9 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-//https://book-perception.firebaseapp.com/__/auth/handler
+
 abstract class AuthBase{
-  User get currentUser;     //the base
+  User get currentUser;
   Future<User> signInAnonymously();   // anonymous sign in
   Future<User> signInWithEmailAndPassword(String email, String password); //email and pass sign in
 
@@ -13,13 +13,13 @@ abstract class AuthBase{
   Stream<User> authStateChanges();  // trying out stream
   Future<User> signInWithGoogle();
   Future<User> signInWithFacebook();
+
 }
 
 class Auth implements AuthBase{
 
   //instance
   final _firebaseAuth = FirebaseAuth.instance;
-
 
   @override
   Stream<User> authStateChanges() => _firebaseAuth.authStateChanges();
@@ -113,5 +113,7 @@ class Auth implements AuthBase{
     await facebookLogin.logOut();
     await _firebaseAuth.signOut();
   }
+
+
 
 }

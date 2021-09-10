@@ -1,7 +1,7 @@
 import 'package:book_perception/Elements/sign_in_button.dart';
 import 'package:book_perception/auth.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'email_sign_in_page.dart';
 
@@ -55,14 +55,15 @@ class SignInScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text("Book Perception",
-          style: TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.w300
-            ),
+          style: GoogleFonts.satisfy(
+            color: Colors.white,
+            fontSize: 35,
+            fontWeight: FontWeight.w400,
           ),
-          backgroundColor: Colors.brown[400],
+          ),
+          backgroundColor: Colors.brown[500],
         ),
-       backgroundColor:Colors.brown[100] ,
+       backgroundColor:Colors.yellow[50] ,
        body: Container(
          child: Padding(
            padding: const EdgeInsets.all(30),

@@ -12,11 +12,11 @@ class _SearchPageState extends State<SearchPage> {
   dynamic books;
 
   List<Widget> booksResult = [Text("No books to show")];
+
   void _displayStuff(String value,BuildContext context) async{
     if(value == ' '){
       return null;
     }
-
     books = await queryBooks(
       value,
       maxResults: 10,
@@ -24,8 +24,6 @@ class _SearchPageState extends State<SearchPage> {
       orderBy: OrderBy.relevance,
       reschemeImageLinks: true,
     );
-
-    booksResult.clear();
     var i=0;
     books.forEach((book) {
       final info = book.info;
@@ -53,22 +51,27 @@ class _SearchPageState extends State<SearchPage> {
             slivers: [
               SliverAppBar(
                 backgroundColor: Colors.brown[200],
-                title: TextField(
-                  controller: _searchController,
-                  onSubmitted: (String value) => _displayStuff(value,context),
-
-
-                    //_displayStuff(value,context),
-                  decoration: InputDecoration(
-                    focusColor:Colors.white,
-                    labelStyle: TextStyle(
-                      color: Colors.white
-                    ) ,
-                      icon: Icon(Icons.search,
-                      color: Colors.white,
-                      ),
-                      labelText: 'Search'
-                  ),
+                title: Column(
+                  children:[ TextField(
+                    controller: _searchController,
+                    onSubmitted: (String value) {
+                      setState(() {
+                        booksResult.clear();
+                        _displayStuff(value, context);
+                      });
+                    },
+                      //_displayStuff(value,context),
+                    decoration: InputDecoration(
+                      focusColor:Colors.white,
+                      labelStyle: TextStyle(
+                        color: Colors.white
+                      ) ,
+                        icon: Icon(Icons.search,
+                        color: Colors.white,
+                        ),
+                        labelText: 'Search'
+                    ),
+                  ),]
                 ),
               ),
               SliverList(delegate: SliverChildListDelegate(booksResult))
