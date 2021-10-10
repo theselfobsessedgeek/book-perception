@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../auth.dart';
 import 'email_sign_in_form.dart';
 

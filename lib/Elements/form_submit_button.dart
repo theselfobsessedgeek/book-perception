@@ -4,7 +4,7 @@ import 'custom_raised_button.dart';
 
 class FormSubmitButton extends CustomRaisedButton {
   FormSubmitButton({
-    @required String text,
+    String text,
     VoidCallback onPressed,
   }) : super(
           child: Text(

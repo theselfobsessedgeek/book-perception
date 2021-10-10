@@ -51,6 +51,7 @@ class Auth implements AuthBase{
   }
 
   @override
+  // ignore: missing_return
   Future<User> signInWithGoogle() async{
     final googleSignIn = GoogleSignIn();
     final googleUser = await googleSignIn.signIn();
@@ -71,7 +72,6 @@ class Auth implements AuthBase{
           message: 'Sign In aborted by the user'
       );
     }
-
   }
   @override
   Future<User> signInWithFacebook() async {

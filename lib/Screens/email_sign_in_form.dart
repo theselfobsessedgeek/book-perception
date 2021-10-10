@@ -88,6 +88,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
         onPressed: submitEnabled ? _submit : null,
       ),
       SizedBox(height: 8.0),
+      // ignore: deprecated_member_use
       FlatButton(
         child: Text(secondaryText),
         onPressed: !_isLoading ? _toggleFormType : null,
