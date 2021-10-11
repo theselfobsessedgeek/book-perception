@@ -1,18 +1,25 @@
 import 'package:book_perception/Elements/search_card.dart';
-import 'package:book_perception/database_firestore.dart';
+import 'package:book_perception/Services/database_firestore.dart';
 import 'package:books_finder/books_finder.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SearchPage extends StatefulWidget {
+  const SearchPage({Key key, this.mContext}) : super(key: key);
+
+  final mContext;
+
   @override
-  _SearchPageState createState() => _SearchPageState();
+  _SearchPageState createState() => _SearchPageState(contextMain: mContext);
 }
 
 class _SearchPageState extends State<SearchPage> {
   final TextEditingController _searchController = TextEditingController();
   dynamic books;
+  _SearchPageState({this.contextMain});
+
+  final contextMain;
   final _firebaseAuth = FirebaseAuth.instance;
 
   User user;
@@ -48,14 +55,14 @@ class _SearchPageState extends State<SearchPage> {
         booksResult.insert(
             i,
             SizedBox(
-              width: MediaQuery.of(context).size.width * 0.65,
+              width: MediaQuery.of(contextMain).size.width * 0.15,
               child: Provider<Database>(
                 create: (_) => FirestoreDatabase(uid: user.uid),
                 child: SearchCard(
                   title: info.title.toString(),
-                  author: info.authors.toString(),
+                  author: info.authors[0],
                   imgPath: info.imageLinks['smallThumbnail'].toString(),
-                  context: context,
+                  context: contextMain,
                 ),
               ),
             ));
@@ -67,35 +74,36 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              backgroundColor: Colors.brown[200],
-              title: Column(children: [
-                TextField(
-                  controller: _searchController,
-                  onSubmitted: (String value) {
-                    setState(() {
-                      booksResult.clear();
-                      _displayStuff(value, context);
-                    });
-                  },
-                  //_displayStuff(value,context),
-                  decoration: InputDecoration(
-                      focusColor: Colors.white,
-                      labelStyle: TextStyle(color: Colors.white),
-                      icon: Icon(
-                        Icons.search,
-                        color: Colors.white,
-                      ),
-                      labelText: 'Search'),
+      body: Column(
+        children: [
+          TextField(
+            controller: _searchController,
+            onSubmitted: (String value) {
+              setState(() {
+                booksResult.clear();
+                setState(() {});
+                _displayStuff(value, contextMain);
+              });
+            },
+            decoration: InputDecoration(
+                focusColor: Colors.black,
+                labelStyle: TextStyle(color: Colors.black),
+                icon: Icon(
+                  Icons.search,
+                  color: Colors.black,
                 ),
-              ]),
+                labelText: 'Search'),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Expanded(
+            child: ListView(
+              scrollDirection: Axis.vertical,
+              children: booksResult,
             ),
-            SliverList(delegate: SliverChildListDelegate(booksResult))
-          ],
-        ),
+          )
+        ],
       ),
     );
   }

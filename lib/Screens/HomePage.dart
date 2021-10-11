@@ -1,6 +1,6 @@
 import 'package:book_perception/Screens/search.dart';
-import 'package:book_perception/auth.dart';
-import 'package:book_perception/database_firestore.dart';
+import 'package:book_perception/Services/auth.dart';
+import 'package:book_perception/Services/database_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,15 +9,13 @@ import 'package:provider/provider.dart';
 import 'Favorites Page.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key key, @required this.auth}) : super(key: key);
-  final AuthBase auth;
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
   final _firebaseAuth = FirebaseAuth.instance;
-
+  bool val = false;
   User user;
 
   @override
@@ -31,16 +29,17 @@ class _HomePageState extends State<HomePage> {
     setState(() {});
   }
 
-  Future<void> _signOut() async {
-    await widget.auth.signOut();
+  Future<void> _signOut(BuildContext context) async {
+    try {
+      final auth = Provider.of<AuthBase>(context, listen: false);
+      await auth.signOut();
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget _body = FavouritesPage(
-      uid: user.uid,
-      mainContext: context,
-    );
     String name =
         (user.displayName != null) ? user.displayName : "Anonymous User";
     return Scaffold(
@@ -66,23 +65,8 @@ class _HomePageState extends State<HomePage> {
                 leading: Icon(Icons.search),
                 title: const Text('Search'),
                 onTap: () {
-                  setState(() {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute<void>(
-                        builder: (context) => Provider<Database>(
-                            create: (_) => FirestoreDatabase(uid: user.uid),
-                            child: SearchPage()),
-                      ),
-                    );
-                  });
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute<void>(
-                      builder: (context) => SearchPage(),
-                    ),
-                  );
-                  print("pressed");
+                  val = false;
+                  setState(() {});
 
                   Navigator.pop(context);
                 }),
@@ -90,16 +74,8 @@ class _HomePageState extends State<HomePage> {
               leading: Icon(Icons.star),
               title: const Text('Favourites'),
               onTap: () {
-                setState(() {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute<void>(
-                        builder: (context) => FavouritesPage(
-                          uid: user.uid,
-                          mainContext: context,
-                        ),
-                      ));
-                });
+                val = true;
+                setState(() {});
                 Navigator.pop(context);
               },
             ),
@@ -118,7 +94,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.brown[500],
         actions: <Widget>[
           TextButton(
-            onPressed: _signOut,
+            onPressed: () => _signOut(context),
             child: Icon(
               Icons.logout,
               color: Colors.white,
@@ -127,7 +103,22 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       backgroundColor: Colors.yellow[50],
-      body: _body,
+      body: _bodyPage(val, context),
     );
+  }
+
+  Widget _bodyPage(bool val, BuildContext context) {
+    return val
+        ? Provider<Database>(
+            create: (_) => FirestoreDatabase(uid: user.uid),
+            child: FavouritesPage(
+              uid: user.uid,
+              mainContext: context,
+            ),
+          )
+        : Provider<Database>(
+            create: (_) => FirestoreDatabase(uid: user.uid),
+            child: SearchPage(mContext: context),
+          );
   }
 }

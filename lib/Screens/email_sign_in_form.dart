@@ -1,9 +1,9 @@
 import 'package:book_perception/Elements/form_submit_button.dart';
 import 'package:flutter/material.dart';
 
-import 'package:book_perception/auth.dart';
+import 'package:book_perception/Services/auth.dart';
 
-import '../validators.dart';
+import '../Services/validators.dart';
 
 enum EmailSignInFormType { signIn, register }
 
