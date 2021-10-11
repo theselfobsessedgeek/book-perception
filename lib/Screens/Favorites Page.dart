@@ -12,11 +12,11 @@ class FavouritesPage extends StatefulWidget {
 }
 
 class _FavouritesPageState extends State<FavouritesPage> {
-  // ignore: unused_element
   _FavouritesPageState({
     this.mContext,
     this.uid,
   });
+
   final String uid;
   final BuildContext mContext;
 
@@ -25,7 +25,6 @@ class _FavouritesPageState extends State<FavouritesPage> {
     getFavourites(mContext);
   }
 
-  // var favourite;
   Stream<List<Widget>> getFavourites(BuildContext context) {
     final path = '$uid/';
     final reference = FirebaseFirestore.instance.collection(path);
@@ -41,12 +40,25 @@ class _FavouritesPageState extends State<FavouritesPage> {
                         children: [
                           Image.network('${data['imgPath']}'),
                           Column(
-                            children: [Text('${data['title']}')],
+                            children: [
+                              Text(
+                                '${data['title']}',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              ),
+                              Text(
+                                '${data['author']}',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: 15,
+                                ),
+                              )
+                            ],
                           )
                         ],
                       ),
-                      // name: data['name'],
-                      // ratePerHour: data['ratePerHour'],
                     ),
                   )
                 : null;
@@ -74,55 +86,3 @@ class _FavouritesPageState extends State<FavouritesPage> {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-// class FavoritesPage extends StatelessWidget {
-
-//   @override
-//   Widget build(BuildContext context) {
-//     CollectionReference _productss = FirebaseFirestore.instance.collection('users/$uid/books');
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Kindacode.com'),
-//       ),
-//       // Using StreamBuilder to display all products from Firestore in real-time
-//       body: StreamBuilder(
-//         stream: _productss.snapshots(),
-//         builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-//           if (streamSnapshot.hasData) {
-//             return ListView.builder(
-//               itemCount: streamSnapshot.data.docs.length,
-//               itemBuilder: (context, index) {
-//                 final DocumentSnapshot documentSnapshot =
-//                 streamSnapshot.data.docs[index];
-//                 return Card(
-//                   margin: EdgeInsets.all(10),
-//                   child: ListTile(
-//                     title: Text(documentSnapshot['name']),
-//                     subtitle: Text(documentSnapshot['author']),
-//                   ),
-//                 );
-//               },
-//             );
-//           }
-//
-//           return Center(
-//             child: CircularProgressIndicator(),
-//           );
-//         },
-//       ),
-//
-//     );
-//   }
-// }
-//
