@@ -9,3 +9,4 @@ The project is majorly divided into 3 sections:
 - Authentication
 - Habit Tracker
 - Search
+- ChatRoom
